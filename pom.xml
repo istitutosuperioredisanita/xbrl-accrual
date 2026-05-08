@@ -117,5 +117,14 @@
       </plugin>
     </plugins>
   </build>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages - happysign-client</name>
+      <url>https://maven.pkg.github.com/istitutosuperioredisanita/xbrl-accrual</url>
+    </repository>
+
+
+  </distributionManagement>
 
 </project>
