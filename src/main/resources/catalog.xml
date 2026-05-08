@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+
+    <!--
+      Rewrites remote XBRL schema URLs to local copies under xsd/global/.
+      Paths are relative to this catalog file (src/main/resources/catalog.xml).
+    -->
+    <rewriteURI
+        uriStartString="http://www.xbrl.org/"
+        rewritePrefix="xsd/global/www.xbrl.org/"/>
+
+</catalog>
