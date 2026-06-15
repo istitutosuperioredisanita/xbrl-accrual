@@ -151,7 +151,7 @@
     <link:loc xlink:type="locator" xlink:href="../accrual-ska-roles_2025-04-14.xsd#sr_SPD_PASS-E.6.1" xlink:label="SPD_PASS-E.6.1" xlink:title="SPD_PASS-E.6.1"/>
     <link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SPD_PASS-E.6" xlink:to="SPD_PASS-E.6.1" xlink:title="presentation: SPD_PASS-E.6 to SPD_PASS-E.6.1" order="1.0"/>
     <link:loc xlink:type="locator" xlink:href="../accrual-ska-roles_2025-04-14.xsd#sr_SPD_PASS-E.6.2" xlink:label="SPD_PASS-E.6.2" xlink:title="SPD_PASS-E.6.2"/>
-    <link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SPD_PASS-E.6" xlink:to="SPD_PASS-E.6.2" xlink:title="presentation: SPD_PASS-E.6 to SPD_PASS-E.6.2" order="2.0"/>
+    <link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SPD_PASS-E.6" xlink:to="SPD_PASS-E.6.2" xlink:title="presentation: SPD_PASS-E.6 to SPD_PASS-E.6.2"PASS-B.1_concorder="2.0"/>
     <link:loc xlink:type="locator" xlink:href="../accrual-ska-roles_2025-04-14.xsd#sr_SPD_PassivitaCorrentiNote45" xlink:label="SPD_PassivitaCorrentiNote45" xlink:title="SPD_PassivitaCorrentiNote45"/>
     <link:presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="SPD_StatoPatrimonialePassivo" xlink:to="SPD_PassivitaCorrentiNote45" xlink:title="presentation: SPD_StatoPatrimonialePassivo to SPD_PassivitaCorrentiNote45" order="2.0"/>
     <link:loc xlink:type="locator" xlink:href="../accrual-ska-roles_2025-04-14.xsd#sr_SPD_DebitiPassivitaCorrenti" xlink:label="SPD_DebitiPassivitaCorrenti" xlink:title="SPD_DebitiPassivitaCorrenti"/>

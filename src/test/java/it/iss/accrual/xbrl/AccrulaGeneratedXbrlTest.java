@@ -1,8 +1,9 @@
 package it.iss.accrual.xbrl;
 
 
-import it.iss.accrual.xbrl.dto.Accrual;
-import it.iss.accrual.xbrl.dto.Fact;
+import it.iss.accrual.xbrl.dto.AccrualXbl;
+import it.iss.accrual.xbrl.dto.ContextXbrl;
+import it.iss.accrual.xbrl.dto.FactXbrl;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,15 +38,27 @@ class AccrulaGeneratedXbrlTest {
     @Test
     void generateStatoPatrimonialeXbrl() {
 
-        Accrual accrual = new Accrual();
+        AccrualXbl accrual = new AccrualXbl();
         accrual.setEnte("ISS");
         accrual.setAnnoBilancio(2025);
-        accrual.getFacts().add(new Fact("SP_AttivoTotale", new BigDecimal("1510000.00"),"2",null,null));
-        accrual.getFacts().add(new Fact("SP_PassivoTotale", new BigDecimal("1520000.00"),"2",null,null));
-        accrual.getFacts().add(new Fact("SP_ATT-A.1", new BigDecimal("1530000.00"),"2",null,"SPD_ATT-A.1"));
-        accrual.getFacts().add(new Fact("SP_ATT-A.2", new BigDecimal("530000.00"),"2",null,"SP_ATT-A.2"));
-        accrual.getFacts().add(new Fact("SP_PASS-B.1", new BigDecimal("1530000.00"),"2",null,"SP_PASS-B.1"));
-        accrual.getFacts().add(new Fact("SP_PASS-B.2.1", new BigDecimal("530000.00"),"2",null,"SP_PASS-B.2.1"));
+
+        accrual.getContexts().put("CTX_INT_2025", new ContextXbrl("CTX_INT_2025",
+                LocalDate.of(2025, 01, 01),
+                LocalDate.of(2025, 12, 31)));
+         accrual.getContexts().put("CTX_IST_2025", new ContextXbrl("CTX_IST_2025",
+                 LocalDate.of(2025, 01, 01),
+                 null));
+
+
+        accrual.getFacts().add(new FactXbrl("SP_AttivoTotale", new BigDecimal("1510000.00"),"2",null,null,accrual.getContexts().get("CTX_IST_2025")));
+        accrual.getFacts().add(new FactXbrl("SP_PassivoTotale", new BigDecimal("1520000.00"),"2",null,null,accrual.getContexts().get("CTX_IST_2025")));
+        accrual.getFacts().add(new FactXbrl("SP_ATT-A.1", new BigDecimal("1530000.00"),"2",null,"SPD_ATT-A.1",accrual.getContexts().get("CTX_IST_2025")));
+        accrual.getFacts().add(new FactXbrl("SP_ATT-A.2", new BigDecimal("530000.00"),"2",null,"SP_ATT-A.2",accrual.getContexts().get("CTX_IST_2025")));
+        accrual.getFacts().add(new FactXbrl("SP_PASS-B.1", new BigDecimal("1530000.00"),"2",null,"SP_PASS-B.1",accrual.getContexts().get("CTX_IST_2025")));
+        accrual.getFacts().add(new FactXbrl("SP_PASS-B.2.1", new BigDecimal("530000.00"),"2",null,"SP_PASS-B.2.1",accrual.getContexts().get("CTX_IST_2025")));
+
+        accrual.getFacts().add(new FactXbrl("CE_A.1", new BigDecimal("1530000.00"),"2",null,"SPD_ATT-A.1",accrual.getContexts().get("CTX_INT_2025")));
+        accrual.getFacts().add(new FactXbrl("CE_A.2", new BigDecimal("530000.00"),"2",null,"SP_ATT-A.2",accrual.getContexts().get("CTX_INT_2025")));
 
         AccrualService imp = new AccrualServiceImpl();
 
