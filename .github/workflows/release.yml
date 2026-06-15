@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: versione-java21
+          ref: 'master'
       - name: Setup Java 21
         uses: actions/setup-java@v4
         with:
@@ -40,9 +40,9 @@ jobs:
             --show-version
         env:
           GITHUB_USERNAME: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{  secrets.ISS_PAT }}
 
-      - name: Bump back to next SNAPSHOT version
+      - name: Update version in pom.xml width SNAPSHOT version
         run: |
           mvn -B versions:set \
             -DnewVersion=${{ github.event.release.tag_name }}-SNAPSHOT \
