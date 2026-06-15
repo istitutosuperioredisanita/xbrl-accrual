@@ -7,8 +7,12 @@ import it.iss.accrual.xbrl.dto.FactXbrl;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -18,9 +22,12 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@ExtendWith(SpringExtension.class) // Abilita il supporto Spring in JUnit 5
+@ContextConfiguration(classes = ConfigurazioneApp.class) // Specifica la configurazione dei Bean
 class AccrulaGeneratedXbrlTest {
     private final Logger log = LoggerFactory.getLogger(AccrulaGeneratedXbrlTest.class);
+    @Autowired
+    AccrualService accrualService;
 
     @Test
     void allPackagesContextInitializes() throws JAXBException {
@@ -40,7 +47,7 @@ class AccrulaGeneratedXbrlTest {
 
         AccrualXbl accrual = new AccrualXbl();
         accrual.setEnte("ISS");
-        accrual.setAnnoBilancio(2025);
+        accrual.setDocumentId("DOC_SKA_REND");
 
         accrual.getContexts().put("CTX_INT_2025", new ContextXbrl("CTX_INT_2025",
                 LocalDate.of(2025, 01, 01),
@@ -60,12 +67,12 @@ class AccrulaGeneratedXbrlTest {
         accrual.getFacts().add(new FactXbrl("CE_A.1", new BigDecimal("1530000.00"),"2",null,"SPD_ATT-A.1",accrual.getContexts().get("CTX_INT_2025")));
         accrual.getFacts().add(new FactXbrl("CE_A.2", new BigDecimal("530000.00"),"2",null,"SP_ATT-A.2",accrual.getContexts().get("CTX_INT_2025")));
 
-        AccrualService imp = new AccrualServiceImpl();
+       // AccrualService imp = new AccrualServiceImpl();
 
         // Verifica che il salvataggio avvenga senza errori
         Path outputPath = Path.of("stato_patrimoniale.xbrl");
         // Pulizia prima del  test
-        byte[] fileContent = assertDoesNotThrow(() ->imp.generaFileXbrl(accrual));
+        byte[] fileContent = assertDoesNotThrow(() ->accrualService.generaFileXbrl(accrual));
         assertDoesNotThrow(() -> {
             Files.write(outputPath, fileContent);
         }, "La scrittura del file ha lanciato un'eccezione imprevista");

@@ -4,18 +4,17 @@ import it.iss.accrual.xbrl.dto.AccrualXbl;
 import it.iss.accrual.xbrl.dto.ContextXbrl;
 import it.iss.accrual.xbrl.jaxb.AccrualXbrlBuilder.MefAccrualDynamicBuilder;
 import jakarta.xml.bind.JAXBException;
+import org.springframework.stereotype.Service;
 import org.xbrl._2003.instance.Context;
 import org.xbrl._2003.instance.Unit;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
+@Service
 public class AccrualServiceImpl implements AccrualService{
 
-    private String getDocumentId(AccrualXbl dati){
-        return "DOC_".concat(dati.getAnnoBilancio().toString());
-    }
+
     private Context getContext(MefAccrualDynamicBuilder builder,ContextXbrl context, String ente){
         if ( !Optional.ofNullable(context).isPresent())
             return null;
@@ -48,7 +47,7 @@ public class AccrualServiceImpl implements AccrualService{
             throw new RuntimeException("Facts non presenti");
 
         MefAccrualDynamicBuilder builder = new MefAccrualDynamicBuilder()
-                .withDocumentId(getDocumentId(dati))
+                .withDocumentId(dati.getDocumentId())
                 .withSchemaRef("accrual-ska-rend-lab-it_2025-04-14.xsd");
 
         Map<String, Context> ctx = getContexts( builder,dati);

@@ -10,7 +10,7 @@ public class AccrualXbl {
 
     String ente;
 
-    Integer annoBilancio;
+    String  documentId;
 
     Map<String,ContextXbrl> contexts = new HashMap<String,ContextXbrl>();
 
@@ -24,12 +24,12 @@ public class AccrualXbl {
         this.ente = ente;
     }
 
-    public Integer getAnnoBilancio() {
-        return annoBilancio;
+    public String getDocumentId() {
+        return documentId;
     }
 
-    public void setAnnoBilancio(Integer annoBilancio) {
-        this.annoBilancio = annoBilancio;
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public List<FactXbrl> getFacts() {
