@@ -1,9 +1,7 @@
 package it.iss.accrual.xbrl;
 
 
-import it.iss.accrual.xbrl.dto.AccrualXbl;
-import it.iss.accrual.xbrl.dto.ContextXbrl;
-import it.iss.accrual.xbrl.dto.FactXbrl;
+import it.iss.accrual.xbrl.dto.*;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.Test;
@@ -49,12 +47,11 @@ class AccrulaGeneratedXbrlTest {
         accrual.setEnte("ISS");
         accrual.setDocumentId("DOC_SKA_REND");
 
-        accrual.getContexts().put("CTX_INT_2025", new ContextXbrl("CTX_INT_2025",
+        accrual.getContexts().put("CTX_INT_2025", new DurationContextXbrl("CTX_INT_2025","iss",
                 LocalDate.of(2025, 01, 01),
                 LocalDate.of(2025, 12, 31)));
-         accrual.getContexts().put("CTX_IST_2025", new ContextXbrl("CTX_IST_2025",
-                 LocalDate.of(2025, 01, 01),
-                 null));
+         accrual.getContexts().put("CTX_IST_2025", new InstantContextXbrl("CTX_IST_2025","iss",
+                 LocalDate.of(2025, 01, 01)));
 
 
         accrual.getFacts().add(new FactXbrl("SP_AttivoTotale", new BigDecimal("1510000.00"),"2",null,null,accrual.getContexts().get("CTX_IST_2025")));
@@ -67,7 +64,6 @@ class AccrulaGeneratedXbrlTest {
         accrual.getFacts().add(new FactXbrl("CE_A.1", new BigDecimal("1530000.00"),"2",null,"SPD_ATT-A.1",accrual.getContexts().get("CTX_INT_2025")));
         accrual.getFacts().add(new FactXbrl("CE_A.2", new BigDecimal("530000.00"),"2",null,"SP_ATT-A.2",accrual.getContexts().get("CTX_INT_2025")));
 
-       // AccrualService imp = new AccrualServiceImpl();
 
         // Verifica che il salvataggio avvenga senza errori
         Path outputPath = Path.of("stato_patrimoniale.xbrl");
