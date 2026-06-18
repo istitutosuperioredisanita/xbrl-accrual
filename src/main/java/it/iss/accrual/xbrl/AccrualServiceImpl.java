@@ -6,7 +6,6 @@ import it.iss.accrual.xbrl.dto.DurationContextXbrl;
 import it.iss.accrual.xbrl.dto.InstantContextXbrl;
 import it.iss.accrual.xbrl.jaxb.AccrualXbrlBuilder.MefAccrualDynamicBuilder;
 import jakarta.xml.bind.JAXBException;
-import org.springframework.stereotype.Service;
 import org.xbrl._2003.instance.Context;
 import org.xbrl._2003.instance.Unit;
 
@@ -14,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Service
+
 public class AccrualServiceImpl implements AccrualService{
 
 

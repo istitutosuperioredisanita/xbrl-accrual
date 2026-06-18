@@ -5,12 +5,9 @@ import it.iss.accrual.xbrl.dto.*;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -20,12 +17,9 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class) // Abilita il supporto Spring in JUnit 5
-@ContextConfiguration(classes = ConfigurazioneApp.class) // Specifica la configurazione dei Bean
 class AccrulaGeneratedXbrlTest {
     private final Logger log = LoggerFactory.getLogger(AccrulaGeneratedXbrlTest.class);
-    @Autowired
-    AccrualService accrualService;
+
 
     @Test
     void allPackagesContextInitializes() throws JAXBException {
@@ -68,6 +62,7 @@ class AccrulaGeneratedXbrlTest {
         // Verifica che il salvataggio avvenga senza errori
         Path outputPath = Path.of("stato_patrimoniale.xbrl");
         // Pulizia prima del  test
+        AccrualService accrualService = new AccrualServiceImpl();
         byte[] fileContent = assertDoesNotThrow(() ->accrualService.generaFileXbrl(accrual));
         assertDoesNotThrow(() -> {
             Files.write(outputPath, fileContent);
