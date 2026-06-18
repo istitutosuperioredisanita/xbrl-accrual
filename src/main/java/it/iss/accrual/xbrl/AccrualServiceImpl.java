@@ -1,6 +1,6 @@
 package it.iss.accrual.xbrl;
 
-import it.iss.accrual.xbrl.dto.AccrualXbl;
+import it.iss.accrual.xbrl.dto.AccrualXbrl;
 import it.iss.accrual.xbrl.dto.ContextXbrl;
 import it.iss.accrual.xbrl.dto.DurationContextXbrl;
 import it.iss.accrual.xbrl.dto.InstantContextXbrl;
@@ -36,7 +36,7 @@ public class AccrualServiceImpl implements AccrualService{
          throw new RuntimeException("Oggetto Context non gestito");
     }
 
-    private Map<String, Context> getContexts (MefAccrualDynamicBuilder builder , AccrualXbl dati){
+    private Map<String, Context> getContexts (MefAccrualDynamicBuilder builder , AccrualXbrl dati){
         //String context= "CTX_".concat(dati.getAnnoBilancio().toString());
         Map<String, Context> contexts = new HashMap<String, Context>();
         dati.getContexts().values().forEach(context->{
@@ -47,7 +47,7 @@ public class AccrualServiceImpl implements AccrualService{
 
 
     @Override
-    public byte[] generaFileXbrl(AccrualXbl dati) throws JAXBException {
+    public byte[] generaFileXbrl(AccrualXbrl dati) throws JAXBException {
 
         if (!Optional.ofNullable(dati).isPresent())
             throw new RuntimeException("Dati non presenti");

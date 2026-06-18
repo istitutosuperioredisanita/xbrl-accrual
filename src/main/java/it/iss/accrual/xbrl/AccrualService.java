@@ -1,12 +1,12 @@
 package it.iss.accrual.xbrl;
 
-import it.iss.accrual.xbrl.dto.AccrualXbl;
+import it.iss.accrual.xbrl.dto.AccrualXbrl;
 import jakarta.xml.bind.JAXBException;
 
 
 public interface AccrualService {
 
-    byte[] generaFileXbrl(AccrualXbl dati) throws JAXBException;
+    byte[] generaFileXbrl(AccrualXbrl dati) throws JAXBException;
 
 
 }

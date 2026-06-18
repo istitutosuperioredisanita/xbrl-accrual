@@ -37,7 +37,7 @@ class AccrulaGeneratedXbrlTest {
     @Test
     void generateStatoPatrimonialeXbrl() {
 
-        AccrualXbl accrual = new AccrualXbl();
+        AccrualXbrl accrual = new AccrualXbrl();
         accrual.setEnte("ISS");
         accrual.setDocumentId("DOC_SKA_REND");
 

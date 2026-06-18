@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class AccrualXbl {
+public class AccrualXbrl {
 
     String ente;
 
