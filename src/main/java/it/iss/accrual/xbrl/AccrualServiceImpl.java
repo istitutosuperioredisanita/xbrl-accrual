@@ -52,9 +52,6 @@ public class AccrualServiceImpl implements AccrualService{
         if (!Optional.ofNullable(dati).isPresent())
             throw new RuntimeException("Dati non presenti");
 
-        if (!Optional.ofNullable(dati.getFacts()).isPresent()||dati.getFacts().isEmpty())
-            throw new RuntimeException("Facts non presenti");
-
         MefAccrualDynamicBuilder builder = new MefAccrualDynamicBuilder()
                 .withDocumentId(dati.getDocumentId())
                 .withSchemaRef("accrual-ska-rend-lab-it_2025-04-14.xsd");
@@ -66,10 +63,12 @@ public class AccrualServiceImpl implements AccrualService{
             builder.addContext(c);
         });
 
-        dati.getFacts().forEach(fact ->{
-            builder.addMonetaryFact(fact.getTaxonomy(),
-                    fact.getValue(), ctx.get( fact.getContext().getId()), eur, fact.getDecimals(), fact.getPrecision(), fact.getFactId());
-        } );
+        if ( dati.getFacts()!=null) {
+            dati.getFacts().forEach(fact -> {
+                builder.addMonetaryFact(fact.getTaxonomy(),
+                        fact.getValue(), ctx.get(fact.getContext().getId()), eur, fact.getDecimals(), fact.getPrecision(), fact.getFactId());
+            });
+        }
 
         return builder.marshal();
 
