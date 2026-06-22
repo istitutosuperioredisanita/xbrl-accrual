@@ -50,7 +50,7 @@ class AccrulaGeneratedXbrlTest {
 
         accrual.getFacts().add(new FactXbrl("SP_AttivoTotale", new BigDecimal("1510000.00"),"2",null,null,accrual.getContexts().get("CTX_IST_2025")));
         accrual.getFacts().add(new FactXbrl("SP_PassivoTotale", new BigDecimal("1520000.00"),"2",null,null,accrual.getContexts().get("CTX_IST_2025")));
-        accrual.getFacts().add(new FactXbrl("SP_ATT-A.1", new BigDecimal("1530000.00"),"2",null,"SPD_ATT-A.1",accrual.getContexts().get("CTX_IST_2025")));
+        accrual.getFacts().add(new FactXbrl("SP_ATT-A.1_2", new BigDecimal("1530000.00"),"2",null,"SPD_ATT-A.1",accrual.getContexts().get("CTX_IST_2025")));
         accrual.getFacts().add(new FactXbrl("SP_ATT-A.2", new BigDecimal("530000.00"),"2",null,"SP_ATT-A.2",accrual.getContexts().get("CTX_IST_2025")));
         accrual.getFacts().add(new FactXbrl("SP_PASS-B.1", new BigDecimal("1530000.00"),"2",null,"SP_PASS-B.1",accrual.getContexts().get("CTX_IST_2025")));
         accrual.getFacts().add(new FactXbrl("SP_PASS-B.2.1", new BigDecimal("530000.00"),"2",null,"SP_PASS-B.2.1",accrual.getContexts().get("CTX_IST_2025")));

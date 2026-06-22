@@ -11,6 +11,7 @@ import org.xbrl._2003.instance.Unit;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -47,30 +48,34 @@ public class AccrualServiceImpl implements AccrualService{
 
 
     @Override
-    public byte[] generaFileXbrl(AccrualXbrl dati) throws JAXBException {
+    public byte[] generaFileXbrl(AccrualXbrl dati) throws AccrualXbrException,NoDataNotFoundException {
+        try {
+            if (!Optional.ofNullable(dati).isPresent())
+                throw new NoDataNotFoundException("Dati non presenti");
 
-        if (!Optional.ofNullable(dati).isPresent())
-            throw new RuntimeException("Dati non presenti");
+            MefAccrualDynamicBuilder builder = new MefAccrualDynamicBuilder()
+                    .withDocumentId(dati.getDocumentId())
+                    .withSchemaRef("accrual-ska-rend-lab-it_2025-04-14.xsd");
 
-        MefAccrualDynamicBuilder builder = new MefAccrualDynamicBuilder()
-                .withDocumentId(dati.getDocumentId())
-                .withSchemaRef("accrual-ska-rend-lab-it_2025-04-14.xsd");
-
-        Map<String, Context> ctx = getContexts( builder,dati);
-        Unit eur = builder.createUnitEUR("EUR");
-        builder.addUnit(eur);
-        ctx.values().forEach(c->{
-            builder.addContext(c);
-        });
-
-        if ( dati.getFacts()!=null) {
-            dati.getFacts().forEach(fact -> {
-                builder.addMonetaryFact(fact.getTaxonomy(),
-                        fact.getValue(), ctx.get(fact.getContext().getId()), eur, fact.getDecimals(), fact.getPrecision(), fact.getFactId());
+            Map<String, Context> ctx = getContexts(builder, dati);
+            Unit eur = builder.createUnitEUR("EUR");
+            builder.addUnit(eur);
+            ctx.values().forEach(c -> {
+                builder.addContext(c);
             });
+
+            if (dati.getFacts() != null) {
+                dati.getFacts().forEach(fact -> {
+                    builder.addMonetaryFact(fact.getTaxonomy(),
+                            fact.getValue(), ctx.get(fact.getContext().getId()), eur, fact.getDecimals(), fact.getPrecision(), fact.getFactId());
+                });
+            }
+
+            return builder.marshal();
+
+        } catch (Exception e) {
+            throw new AccrualXbrException(e);
         }
-
-        return builder.marshal();
-
     }
+
 }

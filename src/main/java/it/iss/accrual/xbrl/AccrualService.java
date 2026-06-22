@@ -6,7 +6,7 @@ import jakarta.xml.bind.JAXBException;
 
 public interface AccrualService {
 
-    byte[] generaFileXbrl(AccrualXbrl dati) throws JAXBException;
+    byte[] generaFileXbrl(AccrualXbrl dati) throws AccrualXbrException,NoDataNotFoundException;
 
 
 }
