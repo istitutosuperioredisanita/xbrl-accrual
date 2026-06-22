@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 public final class MefAccrualDynamicBuilder {
 
-    private static final String DEFAULT_ENTITY_SCHEME = "http://www.mef.gov.it";
+    private static final String DEFAULT_ENTITY_SCHEME = "http://www.rgs.mef.gov.it/xbrl/idente/codicebdap";
     private static final String ISO4217_NS = "http://www.xbrl.org/2003/iso4217";
 
     private final org.xbrl._2003.instance.ObjectFactory xbrliFactory =
