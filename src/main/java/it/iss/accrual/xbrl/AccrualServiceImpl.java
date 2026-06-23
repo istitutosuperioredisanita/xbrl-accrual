@@ -55,7 +55,7 @@ public class AccrualServiceImpl implements AccrualService{
 
             MefAccrualDynamicBuilder builder = new MefAccrualDynamicBuilder()
                     .withDocumentId(dati.getDocumentId())
-                    .withSchemaRef("accrual-ska-rend-lab-it_2025-04-14.xsd");
+                    .withSchemaRef("accrual-ska-rend_2025-04-14.xsd");
 
             Map<String, Context> ctx = getContexts(builder, dati);
             Unit eur = builder.createUnitEUR("EUR");
@@ -70,6 +70,7 @@ public class AccrualServiceImpl implements AccrualService{
                             fact.getValue(), ctx.get(fact.getContext().getId()), eur, fact.getDecimals(), fact.getPrecision(), fact.getFactId());
                 });
             }
+
 
             return builder.marshal();
 
