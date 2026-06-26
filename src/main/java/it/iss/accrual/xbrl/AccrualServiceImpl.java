@@ -5,13 +5,11 @@ import it.iss.accrual.xbrl.dto.ContextXbrl;
 import it.iss.accrual.xbrl.dto.DurationContextXbrl;
 import it.iss.accrual.xbrl.dto.InstantContextXbrl;
 import it.iss.accrual.xbrl.jaxb.AccrualXbrlBuilder.MefAccrualDynamicBuilder;
-import jakarta.xml.bind.JAXBException;
 import org.xbrl._2003.instance.Context;
 import org.xbrl._2003.instance.Unit;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -38,7 +36,6 @@ public class AccrualServiceImpl implements AccrualService{
     }
 
     private Map<String, Context> getContexts (MefAccrualDynamicBuilder builder , AccrualXbrl dati){
-        //String context= "CTX_".concat(dati.getAnnoBilancio().toString());
         Map<String, Context> contexts = new HashMap<String, Context>();
         dati.getContexts().values().forEach(context->{
              contexts.put(context.getId(),getContext( builder,context));
